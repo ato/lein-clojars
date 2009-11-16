@@ -13,7 +13,7 @@ Add lein-clojars to your project's dev-dependencies.  For example:
     :dev-dependencies [[lein-clojars "0.5-SNAPSHOT"]]
     :repositories [["clojars" "http://clojars.org/repo"]])
 
-Create a Clojars account and paste your SSH public key into your profile. [1]
+Create a Clojars account and paste your SSH public key into your [profile] [1].
 If you don't have ssh-keygen available -- perhaps you're using Windows -- 
 then you can use:
 
@@ -22,7 +22,7 @@ then you can use:
 SSH keys will searched for in ~/.leiningen and ~/.ssh under the names id_rsa,
 id_dsa and identity.
 
-[1] http://clojars.org/profile
+[1]: http://clojars.org/profile
 
 Usage
 -----
