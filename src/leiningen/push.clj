@@ -2,7 +2,6 @@
   (:require [lancet])
   (:use [clojure.contrib.java-utils :only [as-file]]
         [clojure.contrib.duck-streams :only [copy]]
-        [leiningen.deps :only [deps]]
         [leiningen.jar :only [jar]]
         [leiningen.pom :only [pom]])
   (:import (com.jcraft.jsch JSch JSchException Logger)
@@ -24,7 +23,7 @@
    (doseq [dir [leindir sshdir]
            name ["id_rsa" "id_dsa" "identity"]
            :let [file (File. dir name)]
-           :when (do (println file) (.exists file))]
+           :when (.exists file)]
      (try
       (.addIdentity jsch (str file))
       (println "added identity" (str file))
