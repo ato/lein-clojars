@@ -2,7 +2,7 @@
   (:require [lancet])
   (:use [clojure.contrib.java-utils :only [as-file]]
         [clojure.contrib.duck-streams :only [copy]]
-        [leiningen.deps :only [deps-if-missing]]
+        [leiningen.deps :only [deps]]
         [leiningen.jar :only [jar]]
         [leiningen.pom :only [pom]])
   (:import (com.jcraft.jsch JSch JSchException Logger)
