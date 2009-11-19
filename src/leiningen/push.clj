@@ -26,16 +26,16 @@
            :when (.exists file)]
      (try
       (.addIdentity jsch (str file))
-      (println "added identity" (str file))
+      (println "Using SSH identity" (str file))
       (catch JSchException e
-        (println "Skipping invalid key" (str file)))))))
+        (println "Skipping invalid SSH key" (str file)))))))
 
 (defn- read-ack [in]
   (let [b (.read in)]
     (when-not (zero? b)
       (throw (Exception. (str "scp expected ACK but got " b))))))
 
-(defn scp-send [repo files]
+(defn scp-send [repo & files]
   (let [jsch (doto (JSch.) (add-identities))
         [user host port path] (parse-repo repo)
         session (doto (.getSession jsch user host port)
@@ -58,6 +58,7 @@
 
          (copy (FileInputStream. file) out)
          (.write out 0)
+	 (.flush out)
          (read-ack in)))
      (.close out)
      (.read in) ; wait for remote close
@@ -68,10 +69,11 @@
 (defn push
   "Push a jar to the Clojars.org repository over scp"
   [project & [repo]]
-  (JSch/setLogger (proxy [Logger] []
-                  (isEnabled [level] true)
-                  (log [level message] (println level message))))
+  (when (System/getProperty "scp.verbose")
+    (JSch/setLogger (proxy [Logger] []
+                      (isEnabled [level] true)
+                      (log [level message] (println level message)))))
   (let [jarfile (str (:root project) "/" (:name project) ".jar")]
     (pom project)
     (jar project)
-    (scp-send repo jarfile)))
+    (scp-send repo "pom.xml" jarfile)))
