@@ -25,5 +25,5 @@
                           (get-hostname) " (Leiningen)"))
     (println "Public key written to" pubfile)
     (println "\nPaste the public key below into your profile at http://clojars.org/profile")
-    (print (slurp pubfile))))
+    (println (slurp pubfile))))
 
