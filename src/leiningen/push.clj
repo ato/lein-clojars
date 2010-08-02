@@ -2,7 +2,7 @@
   (:require [lancet])
   (:use [clojure.contrib.java-utils :only [as-file]]
         [clojure.contrib.duck-streams :only [copy]]
-        [leiningen.jar :only [jar]]
+        [leiningen.jar :only [jar get-default-jar-name]]
         [leiningen.pom :only [pom]])
   (:import (com.jcraft.jsch JSch JSchException Logger)
            (java.io File FileInputStream)))
@@ -73,7 +73,7 @@
     (JSch/setLogger (proxy [Logger] []
                       (isEnabled [level] true)
                       (log [level message] (println level message)))))
-  (let [jarfile (str (:root project) "/" (:name project) ".jar")]
+  (let [jarfile (get-default-jar-name project)]
     (pom project)
     (jar project)
     (try
