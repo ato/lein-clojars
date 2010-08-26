@@ -9,8 +9,8 @@ Setup
 
 Add lein-clojars to your project's dev-dependencies.  For example:
 
-  (defproject my-cool-library "1.0-SNAPSHOT"
-    :dev-dependencies [[lein-clojars "0.5"]]
+  (defproject my-cool-library "1.0"
+    :dev-dependencies [[lein-clojars "0.6"]]
     :repositories [["clojars" "http://clojars.org/repo"]])
 
 Create a Clojars account and paste your SSH public key into your [profile] [1].
