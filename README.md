@@ -9,7 +9,7 @@ Setup
 
 Add lein-clojars as Leiningen plugin:
 
-    lein plugin install lein-clojars 0.6.0
+    lein plugin install lein-clojars 0.7.0
 
 Create a Clojars account and paste your SSH public key into your [profile] [1].
 If you don't have ssh-keygen available -- perhaps you're using Windows -- 

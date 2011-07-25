@@ -1,5 +1,4 @@
 (ns leiningen.push
-  (:require [lancet])
   (:use [clojure.contrib.java-utils :only [as-file]]
         [clojure.contrib.duck-streams :only [copy]]
         [leiningen.jar :only [jar get-default-jar-name]]
