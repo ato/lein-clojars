@@ -88,4 +88,4 @@
            "work yet with DSA or passphrased keys.  I'm working\n"
            "on fixing this. You can also push directly with scp:\n\n"
            "lein pom\n"
-           "scp pom.xml " (:name project) ".jar clojars@clojars.org:" )))))))
+           "scp pom.xml " jarfile " clojars@clojars.org:" )))))))
