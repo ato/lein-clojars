@@ -72,11 +72,12 @@
     (JSch/setLogger (proxy [Logger] []
                       (isEnabled [level] true)
                       (log [level message] (println level message)))))
-  (let [jarfile (get-default-jar-name project)]
+  (let [jarfile (get-default-jar-name project)
+        fullpath #(str (:root project) "/" %)]
     (pom project)
     (jar project)
     (try
-     (scp-send repo "pom.xml" jarfile)
+     (scp-send repo (fullpath "pom.xml") (fullpath jarfile))
      (catch JSchException e
        (.printStackTrace e)
        (when (= (.getMessage e) "Auth fail")
