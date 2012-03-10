@@ -1,7 +1,6 @@
 (ns leiningen.push
-  (:use [clojure.contrib.java-utils :only [as-file]]
-        [clojure.contrib.duck-streams :only [copy]]
-        [leiningen.jar :only [jar get-default-jar-name]]
+  (:require [clojure.java.io :as io])
+  (:use [leiningen.jar :only [jar get-jar-filename]]
         [leiningen.pom :only [pom]])
   (:import (com.jcraft.jsch JSch JSchException Logger)
            (java.io File FileInputStream)))
@@ -49,13 +48,13 @@
      (.connect channel)
      (read-ack in)
      (doseq [path files]
-       (let [file (as-file path)]
+       (let [file (io/file path)]
          (.write out (.getBytes (str "C0644 " (.length file) " "
                                      (.getName file) "\n")))
          (.flush out)
          (read-ack in)
 
-         (copy (FileInputStream. file) out)
+         (io/copy file out)
          (.write out 0)
 	 (.flush out)
          (read-ack in)))
@@ -72,11 +71,11 @@
     (JSch/setLogger (proxy [Logger] []
                       (isEnabled [level] true)
                       (log [level message] (println level message)))))
-  (let [jarfile (get-default-jar-name project)]
+  (let [jarfile (get-jar-filename project)]
     (pom project)
     (jar project)
     (try
-     (scp-send repo "pom.xml" jarfile)
+     (scp-send repo "target/pom.xml" jarfile)
      (catch JSchException e
        (.printStackTrace e)
        (when (= (.getMessage e) "Auth fail")
