@@ -32,3 +32,8 @@ Usage
 To push your project to the Clojars repository, simply type:
 
     lein push
+
+License
+-------
+
+Licensed under the EPL, same as Clojure and Leiningen.  See COPYING.
