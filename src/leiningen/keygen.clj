@@ -10,7 +10,7 @@
      "localhost")))
 
 (defn keygen
-  "Generate an SSH key pair for authenticatin with Clojars.org"
+  "Generate an SSH key pair for authentication with Clojars.org"
   [& args]  
   (println "Generating a new SSH keypair...")
   (let [confdir (File. (System/getProperty "user.home") ".leiningen")
