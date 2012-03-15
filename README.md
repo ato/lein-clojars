@@ -7,9 +7,13 @@ Leiningen.
 Setup
 -----
 
-Add lein-clojars as Leiningen plugin:
+Add lein-clojars as a Leiningen (1.x) plugin:
 
-    lein plugin install lein-clojars 0.7.0
+    lein plugin install lein-clojars 0.8.0
+
+Or for Leiningen 2 add it to ~/.lein/profiles.clj:
+
+    {:user {:plugins [[lein-clojars "0.8.0"]]}}
 
 Create a Clojars account and paste your SSH public key into your [profile] [1].
 If you don't have ssh-keygen available -- perhaps you're using Windows -- 
@@ -28,9 +32,3 @@ Usage
 To push your project to the Clojars repository, simply type:
 
     lein push
-
-TODO
------
-
-Some ideas for extra commands include: search, register and add-dep.
-
