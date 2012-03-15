@@ -71,11 +71,13 @@
     (JSch/setLogger (proxy [Logger] []
                       (isEnabled [level] true)
                       (log [level message] (println level message)))))
-  (let [jarfile (get-jar-filename project)]
+  (let [jarfile (get-jar-filename project)
+        targetpath (.getParentFile (io/file jarfile))
+        pomfile (io/file targetpath "pom.xml")]
     (pom project)
     (jar project)
     (try
-     (scp-send repo "target/pom.xml" jarfile)
+     (scp-send repo pomfile jarfile)
      (catch JSchException e
        (.printStackTrace e)
        (when (= (.getMessage e) "Auth fail")
@@ -86,4 +88,4 @@
            "work yet with DSA or passphrased keys.  I'm working\n"
            "on fixing this. You can also push directly with scp:\n\n"
            "lein pom\n"
-           "scp pom.xml " jarfile " clojars@clojars.org:" )))))))
+           "scp " pomfile " " jarfile " clojars@clojars.org:" )))))))
