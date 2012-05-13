@@ -73,7 +73,7 @@
                       (log [level message] (println level message)))))
   (let [jarfile (get-jar-filename project)
         targetpath (.getParentFile (io/file jarfile))
-        pomfile (io/file targetpath "pom.xml")]
+        pomfile (io/file (:root project) "pom.xml")]
     (pom project)
     (jar project)
     (try
