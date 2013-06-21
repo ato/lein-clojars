@@ -1,6 +1,13 @@
 Clojars.org Leiningen Plugin
 ============================
 
+**Deprecated: Leiningen can now [deploy to Clojars](https://github.com/ato/clojars-web/wiki/Pushing) out of the box.**
+
+This plugin is no longer being maintained.
+
+About
+-----
+
 This is a simple plugn for interacting with Clojars.org directly from 
 Leiningen.
 
